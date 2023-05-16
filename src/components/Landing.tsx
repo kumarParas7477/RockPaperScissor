@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Header from "./Header";
 import { ICards } from "./types";
 import Card from "./Cards";
@@ -106,7 +106,7 @@ const Landing: React.FC<{}> = () => {
         win={win}
       ></Header>
       <h1 style={{color:'green',height:'1rem'}}>{winChoice ?winChoice +" "+'Won' :null}</h1>
-        <h1 style={{color:'Red',height:'1rem'}}>{!winChoice && btnTxt =='Clear' ?'You lost' :null}</h1>
+        <h1 style={{color:'Red',height:'1rem'}}>{!winChoice && btnTxt ==='Clear' ?'You lost' :null}</h1>
       <div
         style={{
           display: "flex",
@@ -118,7 +118,7 @@ const Landing: React.FC<{}> = () => {
           <Card
             card={card}
             handleClick={handleCardClick}
-            won={card.value == winChoice}
+            won={card.value === winChoice}
             betAmount={choices[card.value]}
             isDisable={
               (Object.keys(choices).length === 2 && !choices[card.value])
