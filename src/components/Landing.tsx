@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import Header from "./Header";
-import { ICards } from "./types";
+import { ICards, IWinProps } from "./types";
 import Card from "./Cards";
+import Result from "./Result";
 const cards: ICards[] = [
   {
     value: "Rock",
@@ -27,9 +28,15 @@ const Landing: React.FC<{}> = () => {
   const [computerChoice, setComputerChoice] = useState<string>("");
   const [win, setWin] = useState<number>(0);
   const [choices, setChoices] = useState<any>({});
-  const [winChoice,setWinChoice] = useState('');
+  const [winChoice, setWinChoice] = useState<IWinProps>({
+    choice: "",
+    money: 0,
+  });
+
   const handlePlay = () => {
-    if(!betAmount){return}
+    if (!betAmount) {
+      return;
+    }
     const multiplier =
       Object.keys(choices).length > 1
         ? winMultiplier["twoOptions"]
@@ -53,8 +60,7 @@ const Landing: React.FC<{}> = () => {
     }
 
     if (win) {
-
-      setWinChoice(choice);
+      setWinChoice({ choice, money: choices[choice] * multiplier });
       setUserBalance(
         (userBalance) => userBalance + choices[choice] * multiplier
       );
@@ -67,8 +73,7 @@ const Landing: React.FC<{}> = () => {
     setBetAmount(0);
     setChoices([]);
     setComputerChoice("");
-    setWinChoice('');
-
+    setWinChoice({ choice: "", money: 0 });
   };
   const checkWinningCondition = (val1: string, val2: string) => {
     if (
@@ -82,7 +87,7 @@ const Landing: React.FC<{}> = () => {
     }
   };
   const handleCardClick = (value: string) => {
-    if (userBalance < 500 || btnTxt == 'Clear') {
+    if (userBalance < 500 || btnTxt == "Clear") {
       return;
     }
     const computerChoice =
@@ -98,6 +103,7 @@ const Landing: React.FC<{}> = () => {
     setUserBalance((balance) => balance - 500);
     setBetAmount((amount) => amount + 500);
   };
+
   return (
     <div style={{ backgroundColor: "grey", minHeight: "100vh" }}>
       <Header
@@ -105,8 +111,8 @@ const Landing: React.FC<{}> = () => {
         betAmount={betAmount}
         win={win}
       ></Header>
-      <h1 style={{color:'green',height:'1rem'}}>{winChoice ?winChoice +" "+'Won' :null}</h1>
-        <h1 style={{color:'Red',height:'1rem'}}>{!winChoice && btnTxt ==='Clear' ?'You lost' :null}</h1>
+      /
+      <Result winProps={winChoice} showWinText={btnTxt == "Clear"} />
       <div
         style={{
           display: "flex",
@@ -118,28 +124,28 @@ const Landing: React.FC<{}> = () => {
           <Card
             card={card}
             handleClick={handleCardClick}
-            won={card.value === winChoice}
+            won={card.value === winChoice.choice}
             betAmount={choices[card.value]}
             isDisable={
-              (Object.keys(choices).length === 2 && !choices[card.value])
+              Object.keys(choices).length === 2 && !choices[card.value]
             }
           />
         ))}
       </div>
       <div
         style={{
-          backgroundColor: 'black',
-          border: 'none',
-          color: 'gold',
-          padding: '0.5rem 2rem',
-          textAlign: 'center',
-          display: 'inline',
-          margin: '0.2rem 0.1rem',
-          cursor: 'pointer',
-          borderRadius: '20px',
-          borderColor:'gold',
-          borderWidth:'2px',
-          borderStyle:'solid'
+          backgroundColor: "black",
+          border: "none",
+          color: "gold",
+          padding: "0.5rem 2rem",
+          textAlign: "center",
+          display: "inline",
+          margin: "0.2rem 0.1rem",
+          cursor: "pointer",
+          borderRadius: "20px",
+          borderColor: "gold",
+          borderWidth: "2px",
+          borderStyle: "solid",
         }}
         onClick={btnTxt === "Clear" ? clear : handlePlay}
       >
@@ -148,6 +154,5 @@ const Landing: React.FC<{}> = () => {
     </div>
   );
 };
-
 
 export default Landing;
