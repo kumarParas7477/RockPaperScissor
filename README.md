@@ -5,8 +5,7 @@
 
 ![image](https://github.com/kumarParas7477/RockPaperScissor/assets/37939288/c7d6f5b8-dbcb-4bde-abae-8d77d7b870a9)
 
-
-![image](https://github.com/kumarParas7477/RockPaperScissor/assets/37939288/3c0faa93-7895-4a25-a212-8634f7889329)
+![image](https://github.com/kumarParas7477/RockPaperScissor/assets/37939288/30da7d80-163b-4883-a510-bc1a604e2a30)
 
 
 
