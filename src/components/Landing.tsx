@@ -111,7 +111,7 @@ const Landing: React.FC<{}> = () => {
         betAmount={betAmount}
         win={win}
       ></Header>
-      /
+      
       <Result winProps={winChoice} showWinText={btnTxt == "Clear"} />
       <div
         style={{
